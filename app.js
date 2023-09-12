@@ -49,7 +49,7 @@ function verifyOTP() {
                     })
                     .then(function () {
                         alert("Verified!");
-                        window.location.href = 'new_page.html';
+                        window.location.href = 'https://www.psnacet.edu.in/';
                     })
                     .catch(function (error) {
                         console.error("Error uploading data: " + error.message);
