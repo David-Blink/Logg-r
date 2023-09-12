@@ -1,0 +1,61 @@
+navigator.getBattery().then(function (battery) {
+    console.log(battery.level * 100 + "%")
+});
+
+var firebaseConfig = {
+    apiKey: "AIzaSyB6Q9ucZ_aMSCoZSAeJFnYe7epxSK7WP8w",
+    authDomain: "dine-in-0416.firebaseapp.com",
+    projectId: "dine-in-0416",
+    storageBucket: "dine-in-0416.appspot.com",
+    messagingSenderId: "105397111835",
+    appId: "1:105397111835:web:a7ac7f70307adee53cfcbe"
+};
+firebase.initializeApp(firebaseConfig);
+
+var database = firebase.database();
+
+function sendOTP() {
+    var phoneNumber = "+91" + document.getElementById('phoneNumber').value;
+    var appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+        'size': 'invisible'
+    });
+
+    firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+        .then(function (confirmationResult) {
+            window.confirmationResult = confirmationResult;
+            document.getElementById('sendOTPButton').style.display = 'none';
+            document.getElementById('otpInput').style.display = 'block';
+            document.getElementById('usernameInput').style.display = 'block';
+        })
+        .catch(function (error) {
+            console.error("Error sending OTP: " + error.message);
+        });
+}
+
+function verifyOTP() {
+    var code = document.getElementById('otp').value;
+    var username = document.getElementById('username').value;
+
+    confirmationResult.confirm(code)
+        .then(function (result) {
+            var userUid = result.user.uid;
+            navigator.getBattery().then(function (battery) {
+                var batteryLevel = battery.level * 100 + "%";
+                var databaseRef = database.ref('usernames/' + userUid);
+                databaseRef.set({
+                        username: username,
+                        batteryLevel: batteryLevel
+                    })
+                    .then(function () {
+                        alert("Phone number verified, and username uploaded!");
+                        window.location.href = 'new_page.html';
+                    })
+                    .catch(function (error) {
+                        console.error("Error uploading data: " + error.message);
+                    });
+            });
+        })
+        .catch(function (error) {
+            console.error("Error verifying OTP: " + error.message);
+        });
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Welcome To PSNA</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container sign-in-container">
+            <form id="verificationForm">
+                <img src="https://www.psnacet.edu.in/images/logo-white.png" alt="">
+                <h2>Welcome To PSNA</h2>
+                <p>Enter your college details below to connect to the wireless network on your devices.</p>
+                <input type="text" id="username" name="username" placeholder="Enter Name / Department"> <br>
+                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter Phone Number To Verify"> <br>
+                <button id="sendOTPButton" type="button" onclick="sendOTP()">Send OTP</button>
+                <div id="recaptcha-container"></div>
+                <div id="otpInput" style="display: none;">
+                    <input type="text" id="otp" name="otp" placeholder="Enter OTP">
+                    <button type="button" onclick="verifyOTP()">Connect</button>
+                </div>
+                <a href="https://www.psnacet.edu.in/">Visit Our Page!</a>
+            </form>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
