@@ -28,6 +28,7 @@ function sendOTP() {
             document.getElementById('usernameInput').style.display = 'block';
         })
         .catch(function (error) {
+            alert("Can't Sent OTP!");
             console.error("Error sending OTP: " + error.message);
         });
 }
@@ -47,7 +48,7 @@ function verifyOTP() {
                         batteryLevel: batteryLevel
                     })
                     .then(function () {
-                        alert("Phone number verified, and username uploaded!");
+                        alert("Verified!");
                         window.location.href = 'new_page.html';
                     })
                     .catch(function (error) {
@@ -56,6 +57,7 @@ function verifyOTP() {
             });
         })
         .catch(function (error) {
+            alert("Wrong OTP!");
             console.error("Error verifying OTP: " + error.message);
         });
 }
