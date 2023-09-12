@@ -3,12 +3,13 @@ navigator.getBattery().then(function (battery) {
 });
 
 var firebaseConfig = {
-    apiKey: "AIzaSyB6Q9ucZ_aMSCoZSAeJFnYe7epxSK7WP8w",
-    authDomain: "dine-in-0416.firebaseapp.com",
-    projectId: "dine-in-0416",
-    storageBucket: "dine-in-0416.appspot.com",
-    messagingSenderId: "105397111835",
-    appId: "1:105397111835:web:a7ac7f70307adee53cfcbe"
+  apiKey: "AIzaSyA7-ztjKnf4Umq98uJDoHk0Fs8CN34UrQM",
+  authDomain: "rec-on.firebaseapp.com",
+  databaseURL: "https://rec-on-default-rtdb.firebaseio.com",
+  projectId: "rec-on",
+  storageBucket: "rec-on.appspot.com",
+  messagingSenderId: "917782062165",
+  appId: "1:917782062165:web:3518d5cd57a05af220e0dc"
 };
 firebase.initializeApp(firebaseConfig);
 
