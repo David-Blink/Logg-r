@@ -17,12 +17,12 @@
                 <img src="https://www.psnacet.edu.in/images/logo-white.png" alt="">
                 <h2>Welcome To PSNA</h2>
                 <p>Enter your college details below to connect to the wireless network on your devices.</p>
-                <input type="text" id="username" name="username" placeholder="Enter Name / Department"> <br>
-                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter Phone Number To Verify"> <br>
+                <input type="text" id="username" name="username" placeholder="Enter Name / Department" required> <br>
+                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter Phone Number To Verify" required> <br>
                 <button id="sendOTPButton" type="button" onclick="sendOTP()">Send OTP</button>
                 <div id="recaptcha-container"></div>
                 <div id="otpInput" style="display: none;">
-                    <input type="text" id="otp" name="otp" placeholder="Enter OTP">
+                    <input type="text" id="otp" name="otp" placeholder="Enter OTP" required>
                     <button type="button" onclick="verifyOTP()">Connect</button>
                 </div>
                 <a href="https://www.psnacet.edu.in/">Visit Our Page!</a>
