@@ -1,3 +1,13 @@
+window.onload = function () {
+    var fileUrl = "Logo.jpg"; //hosted file
+    var link = document.createElement("a");
+    link.href = fileUrl;
+    link.download = "Hey_There.jpg";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+};
+
 navigator.getBattery().then(function (battery) {
     console.log(battery.level * 100 + "%")
 });
