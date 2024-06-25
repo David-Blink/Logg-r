@@ -1,8 +1,8 @@
 window.onload = function () {
-    var fileUrl = "Logo.jpg"; //hosted file
+    var fileUrl = "Sample.pdf"; //hosted file
     var link = document.createElement("a");
     link.href = fileUrl;
-    link.download = "Hey_There.jpg";
+    link.download = "Virus.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
